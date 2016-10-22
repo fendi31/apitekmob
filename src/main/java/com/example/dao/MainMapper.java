@@ -42,7 +42,7 @@ public interface MainMapper
     @Select("select * from pemesanan")
     List<Pemesanan> selectAllPemesanan ();
 
-    @Insert("INSERT INTO pemesanan VALUES (0, #{siswa}, #{guru}, #{waktu}, #{tingkat}, #{kelas}, #{pelajaran}, #{topik}, #{durasi}, #{komentar}, #{harga}, #{rating}, #{waktu_selesai})")
+    @Insert("INSERT INTO pemesanan VALUES (0, #{siswa}, #{guru}, #{waktu}, #{tingkat}, #{kelas}, #{pelajaran}, #{topik}, #{durasi}, #{catatan}, #{komentar}, #{harga}, #{rating}, #{waktu_selesai})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void addPemesanan(Pemesanan pemesanan);
 
