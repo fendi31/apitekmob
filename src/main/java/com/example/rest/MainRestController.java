@@ -54,6 +54,21 @@ public class MainRestController {
         return user;
     }
 	
+	@RequestMapping("/user/update")
+    public User updateUser (
+    		@RequestParam(value = "id") int id,
+    		@RequestParam(value = "email") String email,
+    		@RequestParam(value = "password") String password,
+    		@RequestParam(value = "no_hp") String no_hp,
+    		@RequestParam(value = "picture") String picture,
+    		@RequestParam(value = "tingkat") String tingkat,
+    		@RequestParam(value = "sekolah") String sekolah)
+    {
+		User user = new User(id, email, password, null, no_hp, null, null, picture, tingkat, sekolah, false);
+		mainDAO.updateUser(user);
+        return user;
+    }
+	
 	@RequestMapping("/pelajaran/view/{id}")
     public Pelajaran viewPelajaran (@PathVariable(value = "id") String id)
     {

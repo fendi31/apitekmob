@@ -80,5 +80,14 @@ public interface MainMapper
 
     @Select("select * from pemesanan where guru = #{email} and waktu_selesai is not null")
 	List<Pemesanan> selectPemesananByGuruProgres(String email);
+
+    @Update("UPDATE user SET email = #{email}, "
+    		+ "password = #{password}, "
+    		+ "no_hp = #{no_hp}, "
+    		+ "picture = #{picture}, "
+    		+ "tingkat = #{tingkat}, "
+    		+ "sekolah = #{sekolah} "
+    		+ "WHERE id = #{id}")
+	void updateUser(User user);
     
 }

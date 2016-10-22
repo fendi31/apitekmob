@@ -81,6 +81,12 @@ public class MainServiceDatabase implements MainService
 	}
 
 	@Override
+	public void updateUser(User user) {
+		// TODO Auto-generated method stub
+		mainMapper.updateUser(user);
+	}
+
+	@Override
 	public void updatePemesanan(String id, String guru) {
 		// TODO Auto-generated method stub
 		mainMapper.updatePemesananGuru(id, guru);
