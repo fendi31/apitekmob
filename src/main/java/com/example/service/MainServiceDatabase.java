@@ -71,7 +71,23 @@ public class MainServiceDatabase implements MainService
 	@Override
 	public void addPemesanan(Pemesanan pemesanan) {
 		// TODO Auto-generated method stub
+		hitungHarga(pemesanan);
 		mainMapper.addPemesanan(pemesanan);
+	}
+	
+	public void hitungHarga(Pemesanan pemesanan){
+		int tingkat = 0;
+		if(pemesanan.getTingkat().equals("sd")){
+			tingkat = 30000;
+		}
+		else if(pemesanan.getTingkat().equals("smp")){
+			tingkat = 40000;
+		}
+		else{
+			tingkat = 50000;
+		}
+		int harga = pemesanan.getDurasi() * tingkat;
+		pemesanan.setHarga(harga);
 	}
 
 	@Override

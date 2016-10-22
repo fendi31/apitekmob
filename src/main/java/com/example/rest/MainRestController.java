@@ -174,10 +174,9 @@ public class MainRestController {
     		@RequestParam(value = "pelajaran") String pelajaran,
     		@RequestParam(value = "topik") String topik,
     		@RequestParam(value = "durasi") int durasi,
-    		@RequestParam(value = "catatan") String catatan,
-    		@RequestParam(value = "harga") int harga)
+    		@RequestParam(value = "catatan") String catatan)
     {
-		Pemesanan pemesanan = new Pemesanan(0, siswa, null, new Date(), tingkat, kelas, pelajaran, topik, durasi, catatan, null, harga, -1, null);
+		Pemesanan pemesanan = new Pemesanan(0, siswa, null, new Date(), tingkat, kelas, pelajaran, topik, durasi, catatan, null, -1, -1, null);
 		mainDAO.addPemesanan(pemesanan);
 		List<Pemesanan> listPemesanan = new ArrayList<Pemesanan>();
 		listPemesanan.add(pemesanan);
