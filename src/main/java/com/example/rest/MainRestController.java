@@ -108,7 +108,7 @@ public class MainRestController {
     }
 	
 	@RequestMapping("/pemesanan/userProgres")
-    public Map<String, List<Pemesanan>> viewPemesananByUserProgress(@RequestParam(value = "email") String email)
+    public Map<String, List<Pemesanan>> viewPemesananByUserProgres(@RequestParam(value = "email") String email)
     {
 		List<Pemesanan> pemesanan = mainDAO.selectPemesananByUserProgres (email);
 		Map<String, List<Pemesanan>> result = new HashMap<String, List<Pemesanan>>();
@@ -121,7 +121,7 @@ public class MainRestController {
 	@RequestMapping("/pemesanan/userDone")
     public Map<String, List<Pemesanan>> viewPemesananByUserDone(@RequestParam(value = "email") String email)
     {
-		List<Pemesanan> pemesanan = mainDAO.selectPemesananByGuruDone (email);
+		List<Pemesanan> pemesanan = mainDAO.selectPemesananByUserDone (email);
 		Map<String, List<Pemesanan>> result = new HashMap<String, List<Pemesanan>>();
 		
         result.put("Android", pemesanan);
@@ -130,7 +130,7 @@ public class MainRestController {
     }
 	
 	@RequestMapping("/pemesanan/guruProgres")
-    public Map<String, List<Pemesanan>> viewPemesananByGuruProgress(@RequestParam(value = "email") String email)
+    public Map<String, List<Pemesanan>> viewPemesananByGuruProgres(@RequestParam(value = "email") String email)
     {
 		List<Pemesanan> pemesanan = mainDAO.selectPemesananByGuruProgres (email);
 		Map<String, List<Pemesanan>> result = new HashMap<String, List<Pemesanan>>();
@@ -143,7 +143,7 @@ public class MainRestController {
 	@RequestMapping("/pemesanan/guruDone")
     public Map<String, List<Pemesanan>> viewPemesananByGuruDone(@RequestParam(value = "email") String email)
     {
-		List<Pemesanan> pemesanan = mainDAO.selectPemesananByUserDone (email);
+		List<Pemesanan> pemesanan = mainDAO.selectPemesananByGuruDone (email);
 		Map<String, List<Pemesanan>> result = new HashMap<String, List<Pemesanan>>();
 		
         result.put("Android", pemesanan);
