@@ -121,6 +121,28 @@ public class MainRestController {
 	@RequestMapping("/pemesanan/userDone")
     public Map<String, List<Pemesanan>> viewPemesananByUserDone(@RequestParam(value = "email") String email)
     {
+		List<Pemesanan> pemesanan = mainDAO.selectPemesananByGuruDone (email);
+		Map<String, List<Pemesanan>> result = new HashMap<String, List<Pemesanan>>();
+		
+        result.put("Android", pemesanan);
+        
+        return result;
+    }
+	
+	@RequestMapping("/pemesanan/guruProgres")
+    public Map<String, List<Pemesanan>> viewPemesananByGuruProgress(@RequestParam(value = "email") String email)
+    {
+		List<Pemesanan> pemesanan = mainDAO.selectPemesananByGuruProgres (email);
+		Map<String, List<Pemesanan>> result = new HashMap<String, List<Pemesanan>>();
+		
+        result.put("Android", pemesanan);
+        
+        return result;
+    }
+	
+	@RequestMapping("/pemesanan/guruDone")
+    public Map<String, List<Pemesanan>> viewPemesananByGuruDone(@RequestParam(value = "email") String email)
+    {
 		List<Pemesanan> pemesanan = mainDAO.selectPemesananByUserDone (email);
 		Map<String, List<Pemesanan>> result = new HashMap<String, List<Pemesanan>>();
 		

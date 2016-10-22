@@ -41,4 +41,8 @@ public interface MainService
 	List<Pemesanan> selectPemesananByUserProgres(String email);
 
 	List<Pemesanan> selectPemesananByUserDone(String email);
+
+	List<Pemesanan> selectPemesananByGuruDone(String email);
+
+	List<Pemesanan> selectPemesananByGuruProgres(String email);
 }

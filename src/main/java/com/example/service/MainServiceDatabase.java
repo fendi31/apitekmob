@@ -116,4 +116,16 @@ public class MainServiceDatabase implements MainService
 		return mainMapper.selectPemesananByUserDone(email);
 	}
 
+	@Override
+	public List<Pemesanan> selectPemesananByGuruDone(String email) {
+		// TODO Auto-generated method stub
+		return mainMapper.selectPemesananByGuruDone(email);
+	}
+
+	@Override
+	public List<Pemesanan> selectPemesananByGuruProgres(String email) {
+		// TODO Auto-generated method stub
+		return mainMapper.selectPemesananByGuruProgres(email);
+	}
+
 }
