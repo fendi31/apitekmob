@@ -69,10 +69,10 @@ public interface MainMapper
     @Select("select * from pemesanan where guru is null")
 	List<Pemesanan> selectAllPemesananByGuru();
 
-    @Select("select * from pemesanan where email = #{email} and waktu_selesai is null")
+    @Select("select * from pemesanan where siswa = #{email} and waktu_selesai is null")
 	List<Pemesanan> selectPemesananByUserProgres(String email);
 
-    @Select("select * from pemesanan where email = #{email} and waktu_selesai is not null")
+    @Select("select * from pemesanan where siswa = #{email} and waktu_selesai is not null")
 	List<Pemesanan> selectPemesananByUserDone(String email);
     
 }
