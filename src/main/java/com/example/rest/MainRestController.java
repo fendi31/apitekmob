@@ -1,7 +1,10 @@
 package com.example.rest;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -94,28 +97,40 @@ public class MainRestController {
     }
 	
 	@RequestMapping("/pemesanan/guru")
-    public List<Pemesanan> viewAllPemesananByGuru()
+    public Map<String, List<Pemesanan>> viewAllPemesananByGuru()
     {
         List<Pemesanan> pemesanan = mainDAO.selectAllPemesananByGuru ();
-        return pemesanan;
+		Map<String, List<Pemesanan>> result = new HashMap<String, List<Pemesanan>>();
+		
+        result.put("Android", pemesanan);
+        
+        return result;
     }
 	
 	@RequestMapping("/pemesanan/userProgres")
-    public List<Pemesanan> viewPemesananByUserProgress(@RequestParam(value = "email") String email)
+    public Map<String, List<Pemesanan>> viewPemesananByUserProgress(@RequestParam(value = "email") String email)
     {
 		List<Pemesanan> pemesanan = mainDAO.selectPemesananByUserProgres (email);
-        return pemesanan;
+		Map<String, List<Pemesanan>> result = new HashMap<String, List<Pemesanan>>();
+		
+        result.put("Android", pemesanan);
+        
+        return result;
     }
 	
 	@RequestMapping("/pemesanan/userDone")
-    public List<Pemesanan> viewPemesananByUserDone(@RequestParam(value = "email") String email)
+    public Map<String, List<Pemesanan>> viewPemesananByUserDone(@RequestParam(value = "email") String email)
     {
 		List<Pemesanan> pemesanan = mainDAO.selectPemesananByUserDone (email);
-        return pemesanan;
+		Map<String, List<Pemesanan>> result = new HashMap<String, List<Pemesanan>>();
+		
+        result.put("Android", pemesanan);
+        
+        return result;
     }
 	
 	@RequestMapping("/pemesanan/add")
-    public Pemesanan addPemesanan (
+    public Map<String, List<Pemesanan>> addPemesanan (
     		@RequestParam(value = "siswa") String siswa,
     		@RequestParam(value = "tingkat") String tingkat,
     		@RequestParam(value = "kelas") int kelas,
@@ -127,45 +142,77 @@ public class MainRestController {
     {
 		Pemesanan pemesanan = new Pemesanan(0, siswa, null, new Date(), tingkat, kelas, pelajaran, topik, durasi, catatan, null, harga, -1, null);
 		mainDAO.addPemesanan(pemesanan);
-        return pemesanan;
+		List<Pemesanan> listPemesanan = new ArrayList<Pemesanan>();
+		listPemesanan.add(pemesanan);
+		Map<String, List<Pemesanan>> result = new HashMap<String, List<Pemesanan>>();
+		
+        result.put("Android", listPemesanan);
+        
+        return result;
     }
 	
 	@RequestMapping("/pemesanan/addGuru")
-    public Pemesanan addGuru (
+    public Map<String, List<Pemesanan>> addGuru (
     		@RequestParam(value = "id") String id,
     		@RequestParam(value = "guru") String guru)
     {
 		mainDAO.updatePemesanan(id, guru);
-        return mainDAO.selectPemesanan(id);
+        Pemesanan pemesanan = mainDAO.selectPemesanan(id);
+		List<Pemesanan> listPemesanan = new ArrayList<Pemesanan>();
+		listPemesanan.add(pemesanan);
+		Map<String, List<Pemesanan>> result = new HashMap<String, List<Pemesanan>>();
+		
+        result.put("Android", listPemesanan);
+        
+        return result;
     }
 	
 	@RequestMapping("/pemesanan/addKomentar")
-    public Pemesanan addKomentar (
+    public Map<String, List<Pemesanan>> addKomentar (
     		@RequestParam(value = "id") String id,
     		@RequestParam(value = "rating") int rating)
     {
 		mainDAO.updatePemesanan(id, "", rating);
-        return mainDAO.selectPemesanan(id);
+        Pemesanan pemesanan = mainDAO.selectPemesanan(id);
+		List<Pemesanan> listPemesanan = new ArrayList<Pemesanan>();
+		listPemesanan.add(pemesanan);
+		Map<String, List<Pemesanan>> result = new HashMap<String, List<Pemesanan>>();
+		
+        result.put("Android", listPemesanan);
+        
+        return result;
     }
 
 	@RequestMapping("/pemesanan/addSelesai")
-    public Pemesanan addSelesai (
+    public Map<String, List<Pemesanan>> addSelesai (
     		@RequestParam(value = "id") String id)
     {
 		mainDAO.updatePemesanan(id, new Date());
-        return mainDAO.selectPemesanan(id);
+        Pemesanan pemesanan = mainDAO.selectPemesanan(id);
+		List<Pemesanan> listPemesanan = new ArrayList<Pemesanan>();
+		listPemesanan.add(pemesanan);
+		Map<String, List<Pemesanan>> result = new HashMap<String, List<Pemesanan>>();
+		
+        result.put("Android", listPemesanan);
+        
+        return result;
     }
 	
 	@RequestMapping("/user/check")
-    public User checkEmail (
+    public Map<String, List<User>> checkEmail (
     		@RequestParam(value = "email") String email,
     		@RequestParam(value = "password") String password)
-    {
+    {        
         User user = mainDAO.selectUser (email);
+        List<User> users = new ArrayList<User>();
+		Map<String, List<User>> result = new HashMap<String, List<User>>();
         if(user == null){
         	user = new User();
         	user.setStatus(false);
-        	return user;
+        	
+            users.add(user);
+            result.put("Android", users);
+        	return result;
         }
         if(password.equals(user.getPassword())){
         	user.setStatus(true);
@@ -173,6 +220,9 @@ public class MainRestController {
         else{
         	user.setStatus(false);
         }
-        return user;
+
+        users.add(user);
+        result.put("Android", users);
+        return result;
     }
 }
