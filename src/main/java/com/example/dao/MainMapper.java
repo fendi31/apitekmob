@@ -74,12 +74,12 @@ public interface MainMapper
 
     @Select("select * from pemesanan where siswa = #{email} and waktu_selesai is not null")
 	List<Pemesanan> selectPemesananByUserDone(String email);
-
+    
     @Select("select * from pemesanan where guru = #{email} and waktu_selesai is null")
-	List<Pemesanan> selectPemesananByGuruDone(String email);
+	List<Pemesanan> selectPemesananByGuruProgres(String email);
 
     @Select("select * from pemesanan where guru = #{email} and waktu_selesai is not null")
-	List<Pemesanan> selectPemesananByGuruProgres(String email);
+	List<Pemesanan> selectPemesananByGuruDone(String email);
 
     @Update("UPDATE user SET email = #{email}, "
     		+ "password = #{password}, "
