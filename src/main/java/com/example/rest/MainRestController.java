@@ -55,7 +55,7 @@ public class MainRestController {
     }
 	
 	@RequestMapping("/user/update")
-    public User updateUser (
+    public Map<String, List<User>> updateUser (
     		@RequestParam(value = "id") int id,
     		@RequestParam(value = "email") String email,
     		@RequestParam(value = "password") String password,
@@ -66,7 +66,13 @@ public class MainRestController {
     {
 		User user = new User(id, email, password, null, no_hp, null, null, picture, tingkat, sekolah, false);
 		mainDAO.updateUser(user);
-        return user;
+
+		Map<String, List<User>> result = new HashMap<String, List<User>>();
+		ArrayList<User> list = new ArrayList<User>();
+		list.add(user);
+        result.put("Android", list);
+        
+        return result;
     }
 	
 	@RequestMapping("/pelajaran/view/{id}")
